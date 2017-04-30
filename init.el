@@ -109,6 +109,9 @@
 ;; delete trailing whitespace on save action
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; Save here instead of littering current directory with emacs backup files
+(setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
+
 
 ;;
 ;; Load other modules
