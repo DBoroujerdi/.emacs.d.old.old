@@ -101,7 +101,14 @@
 	  (setq ido-vertical-define-keys 'C-n-and-C-p-only)
 	  (setq ido-enable-flex-matching t)
 	  (setq ido-ignore-extensions t)
-	  ))
+	  )
+  :config (progn
+	    (use-package ido-ubiquitous
+	      :ensure t)
+
+	    (use-package ido-vertical-mode
+	      :ensure t)
+	    ))
 
 (use-package command-log-mode
   :ensure t
@@ -109,11 +116,6 @@
 	    (require 'command-log-mode)
 	    ))
 
-(use-package ido-ubiquitous
-  :ensure t)
-
-(use-package ido-vertical-mode
-  :ensure t)
 
 (use-package docker
   :ensure t
