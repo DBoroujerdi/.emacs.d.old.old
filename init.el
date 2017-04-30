@@ -106,6 +106,9 @@
 ;; set font size
 (set-face-attribute 'default nil :height 120)
 
+;; delete trailing whitespace on save action
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 ;;
 ;; Load other modules
