@@ -140,7 +140,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (go-eldoc go-mode shackle beacon drag-stuff gitignore-mode erlang elixir-yasnippets flycheck-dialyxir alchemist flycheck-elixir flycheck-mix neotree flycheck projectile which-key smartparens magit company git-gutter popup-imenu ido-vertical-mode ido-ubiquitous command-log-mode smex highlight-symbol fill-column-indicator solarized-theme rainbow-delimiters exec-path-from-shell all-the-icons use-package))))
+    (yaml-mode go-eldoc go-mode shackle beacon drag-stuff gitignore-mode erlang elixir-yasnippets flycheck-dialyxir alchemist flycheck-elixir flycheck-mix neotree flycheck projectile which-key smartparens magit company git-gutter popup-imenu ido-vertical-mode ido-ubiquitous command-log-mode smex highlight-symbol fill-column-indicator solarized-theme rainbow-delimiters exec-path-from-shell all-the-icons use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
