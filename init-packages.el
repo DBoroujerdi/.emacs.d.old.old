@@ -19,8 +19,8 @@
 	  )
 
   :config (progn
-	    (setq indent-tabs-mode nil)    
-	    (define-key flyspell-mode-map "\M-\t" nil)    
+	    (setq indent-tabs-mode nil)
+	    (define-key flyspell-mode-map "\M-\t" nil)
 	    (define-key emacs-lisp-mode-map "\r" 'reindent-then-newline-and-indent)
 	    (define-key emacs-lisp-mode-map "\C-x\C-e" 'pp-eval-last-sexp)
 	    )
@@ -90,14 +90,14 @@
 
 	    (global-set-key (kbd "M-x") 'smex)
 	    (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-	    (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)    
+	    (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 	    ))
 
 (use-package ido
   :init (progn
 	  (ido-mode 1)
 	  (ido-vertical-mode 1)
-	  (ido-everywhere 1)    
+	  (ido-everywhere 1)
 	  (setq ido-vertical-define-keys 'C-n-and-C-p-only)
 	  (setq ido-enable-flex-matching t)
 	  (setq ido-ignore-extensions t)
@@ -225,7 +225,7 @@
 	  (add-hook 'elixir-mode-hook 'flycheck-elixir)
 	  (add-hook 'elixir-mode-hook 'flycheck-mode)
 	  )
-  :config (progn    	    
+  :config (progn
 	    ;; smart parens - reuse some ruby functionality
 	    (sp-with-modes '(elixir-mode)
 	      (sp-local-pair "fn" "end"
@@ -247,7 +247,7 @@
   :ensure t
   :config (progn
 	    (setq alchemist-goto-erlang-source-dir "~/projects/open-source/otp/")
-	    (setq alchemist-goto-elixir-source-dir "~/projects/open-source/elixir/")    
+	    (setq alchemist-goto-elixir-source-dir "~/projects/open-source/elixir/")
 	    ;; (setq alchemist-key-command-prefix (kbd "C-c ,")) ;; default: (kbd "C-c a")
 	    (setq alchemist-test-display-compilation-output t)
 	    (setq alchemist-hooks-test-on-save nil)
@@ -279,7 +279,7 @@
 
 	    (setq-default fill-column 80)
 	    (setq erlang-indent-level 4)
-	    
+
 	    (add-to-list 'completion-ignored-extensions ".beam")
 	    (add-to-list 'auto-mode-alist '("\\.term\\'" . erlang-mode))
 	    (add-to-list 'auto-mode-alist '("\\.terms\\'" . erlang-mode))
