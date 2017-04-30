@@ -13,7 +13,7 @@
 
 (global-set-key (kbd "M-d") 'db/duplicate-line)
 (global-set-key (kbd "RET") 'newline-and-indent)
-(global-set-key (kbd "M-/") 'comment-line)
+(global-set-key (kbd "C-/") 'comment-line)
 
 ;; magit shortcuts
 (global-set-key (kbd "C-c s") 'magit-status)
@@ -33,6 +33,8 @@
 (global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")
 
 (global-set-key (kbd "M-/") 'hippie-expand)
+
+(global-set-key (kbd "C-u") 'undo)
 
 ;; remap C-a to `smarter-move-beginning-of-line'
 (global-set-key [remap move-beginning-of-line] 'db/smarter-move-beginning-of-line)
