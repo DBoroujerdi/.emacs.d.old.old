@@ -47,6 +47,9 @@
 ;; inserts newline on C-n when on last line in the buffer
 (setq next-line-add-newlines t)
 
+;; prefer spaces over tabs
+(setq-default indent-tabs-mode nil)
+
 ;; typed text replaces selected
 (delete-selection-mode 1)
 
