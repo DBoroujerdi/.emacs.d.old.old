@@ -122,6 +122,14 @@
 	    (require 'command-log-mode)
 	    ))
 
+(use-package avy
+  :ensure t
+  :bind (("C-." . avy-goto-word-or-subword-1)
+         ("C-," . avy-goto-char))
+  :config (progn
+            (setq avy-all-windows t)
+            (setq avy-styles-alist '((avy-goto-char-2 . post)))
+            (setq avy-background t)))
 
 (use-package docker
   :ensure t
