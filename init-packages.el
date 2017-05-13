@@ -5,6 +5,12 @@
 (use-package makefile-mode
   :mode "Makefile")
 
+(use-package windmove
+  :bind (("S-<left>" . windmove-left)
+         ("S-<right>" . windmove-right)
+         ("S-<up>" . windmove-up)
+         ("S-<down>" . windmove-down)))
+
 (use-package emacs-lisp-mode
   :init (progn
 	  ;; Recompile if .elc exists.
@@ -142,9 +148,14 @@
 
 (use-package magit
   :ensure t
+  :bind (("C-c s" . magit-status)
+         ("C-c l" . magit-log)
+         ("C-c c" . magit-checkout)
+         ("C-c b" . magit-blame))
   :init (progn
 	  (setenv "GIT_PAGER" "")
 	  (setq magit-completing-read-function 'magit-ido-completing-read)))
+
 
 (use-package smartparens
   :ensure t
