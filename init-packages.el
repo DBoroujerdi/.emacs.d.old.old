@@ -32,6 +32,13 @@
 	    )
   )
 
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-S-e C-S-e" . mc/edit-lines)
+         ("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("S-<f6>" . mc/mark-all-like-this)))
+
 ;; This package highlights the cursor every time it jumps abruptedly from a
 ;; place to another (e.g. when changing windows and so on).
 (use-package beacon
