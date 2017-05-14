@@ -115,6 +115,9 @@
 ;; Save here instead of littering current directory with emacs backup files
 (setq backup-directory-alist `(("." . "~/.emacs.d/.saves")))
 
+;; Mousewheel scrolling can be quite annoying, lets fix it to scroll smoothly.
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
+(setq mouse-wheel-progressive-speed nil)
 
 ;;
 ;; Load other modules
