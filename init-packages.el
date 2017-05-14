@@ -238,8 +238,8 @@
 	  (global-set-key [f8] 'neotree-toggle)
 	  ))
 
-(use-package flycheck-mix
-  :ensure t)
+;; (use-package flycheck-mix
+;;   :ensure t)
 
 (use-package flycheck-elixir
   :ensure t)
@@ -249,8 +249,8 @@
   :init (progn
 	  (add-hook 'elixir-mode-hook 'company-mode)
 	  (add-hook 'elixir-mode-hook 'alchemist-mode)
-	  (add-hook 'elixir-mode-hook 'elixir-add-electric-pairs)
-	  (add-hook 'elixir-mode-hook 'flycheck-elixir)
+	  ;; (add-hook 'elixir-mode-hook 'elixir-add-electric-pairs)
+	  ;; (add-hook 'elixir-mode-hook 'flycheck-elixir)
 	  (add-hook 'elixir-mode-hook 'flycheck-mode)
 	  )
   :config (progn
