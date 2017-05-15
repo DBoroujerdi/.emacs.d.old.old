@@ -85,9 +85,6 @@
 (use-package rainbow-delimiters
   :ensure t)
 
-(use-package solarized-theme
-  :ensure t)
-
 (use-package fill-column-indicator
   :ensure t)
 

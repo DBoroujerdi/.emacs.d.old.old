@@ -129,10 +129,13 @@
 
 
 ;;
-;; Theme
+;; Themes
 ;;
 
-(load-theme 'solarized-light t)
+(use-package solarized-theme :ensure t)
+(use-package arjen-grey-theme :ensure t)
+
+(load-theme 'arjen-grey t)
 
 
 ;;
