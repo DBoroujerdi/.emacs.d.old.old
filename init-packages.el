@@ -146,12 +146,12 @@
   :commands popup-imenu
   :bind ("M-i" . popup-imenu))
 
-(use-package git-gutter
+(use-package git-gutter-fringe
   :ensure t
   :diminish git-gutter-mode
-  :init (progn
-          (global-git-gutter-mode)
-          ))
+  :config
+  (setq git-gutter-fr:side 'left-fringe)
+  (global-git-gutter-mode t))
 
 (use-package company
   :ensure t
