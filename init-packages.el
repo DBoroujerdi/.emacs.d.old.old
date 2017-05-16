@@ -2,6 +2,9 @@
 
 (use-package diminish)
 
+(use-package s
+  :ensure t)
+
 (use-package makefile-mode
   :mode "Makefile")
 
@@ -385,6 +388,40 @@
 	    (use-package cider
 	      :mode "\\.clj\\'")
 	    ))
+
+(use-package counsel
+  :ensure t
+  :bind
+  (("M-x" . counsel-M-x)
+   ("M-y" . counsel-yank-pop)
+   :map ivy-minibuffer-map
+   ("M-y" . ivy-next-line)))
+
+
+(use-package swiper
+  :ensure t
+  :bind (("C-s" . swiper)
+         ("C-x C-f" . counsel-find-file)
+         ("M-i" . counsel-imenu)
+         ("C-c g" . counsel-git)
+         ("C-c j" . counsel-git-grep)
+         ("C-c k" . counsel-ag)
+         ("C-c l" . counsel-locate)
+         ("C-c h f" . counsel-describe-function)
+         ("C-c h v" . counsel-describe-variable)
+         ("C-c i u" . counsel-unicode-char)
+         ))
+
+(use-package counsel-projectile
+  :ensure t
+  :config
+  (counsel-projectile-on))
+
+(use-package ace-window
+  :ensure t
+  :config
+  (global-set-key (kbd "C-x o") 'ace-window))
+
 
 (provide 'init-packages)
 ;;; init-packages.el ends here
