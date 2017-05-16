@@ -11,6 +11,13 @@
          ("S-<up>" . windmove-up)
          ("S-<down>" . windmove-down)))
 
+(use-package nyan-mode
+  :ensure t
+  :init (nyan-mode 1))
+
+(use-package zone-nyan
+  :ensure t)
+
 (use-package emacs-lisp-mode
   :init (progn
 	  ;; Recompile if .elc exists.
