@@ -5,6 +5,11 @@
 (use-package makefile-mode
   :mode "Makefile")
 
+(use-package symon
+  :ensure t
+  :config (progn
+            (symon-mode)))
+
 (use-package windmove
   :bind (("S-<left>" . windmove-left)
          ("S-<right>" . windmove-right)
