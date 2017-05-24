@@ -222,7 +222,7 @@
           (yas-global-mode 1))
   :config (progn
 	    ;; (global-unset-key (kbd "s-e"))
-	    (setq-default yas-snippet-dirs '("~/.emacs.d/snippets"))
+	    ;; (setq-default yas-snippet-dirs '("~/.emacs.d/snippets"))
 	    ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
 	    ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
 	    ;; (define-key yas-minor-mode-map (kbd "s-e") 'yas-expand)
