@@ -15,8 +15,8 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-/") 'comment-line)
 
-
-(global-set-key (kbd "C-z") 'imenu)
+;; a more concise way of killing the current buffer
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 ;; duplicate line
 (global-set-key "\C-c\C-d" "\C-a\C- \C-n\M-w\C-y")

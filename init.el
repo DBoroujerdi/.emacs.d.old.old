@@ -101,10 +101,10 @@
 
 (setq c-default-style "linux" c-basic-offset 8)
 
-(set-frame-font "Inconsolata 13" t t)
+;; (set-frame-font "Inconsolata 18" t t)
 
 ;; for new frames and emacs client..
-(setq default-frame-alist '((font . "Inconsolata 13")))
+;; (setq default-frame-alist '((font . "DejaVu Sans Mono")))
 
 ;; set font size
 (set-face-attribute 'default nil :height 120)
@@ -119,6 +119,18 @@
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
 
+
+;; suppress bell sounds
+(setq ring-bell-function (progn ))
+(setq visible-bell nil)
+
+
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda ()
+                   (flyspell-mode 1)
+                   (visual-line-mode 1)
+                   )))
+
 ;;
 ;; Load other modules
 ;;
@@ -132,10 +144,10 @@
 ;; Themes
 ;;
 
-(use-package solarized-theme :ensure t)
-(use-package arjen-grey-theme :ensure t)
+;; (use-package solarized-theme :ensure t)
+;; (use-package arjen-grey-theme :ensure t)
 
-(load-theme 'arjen-grey t)
+;; (load-theme 'arjen-grey t)
 
 
 ;;
@@ -147,9 +159,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
  '(package-selected-packages
    (quote
-    (yaml-mode go-eldoc go-mode shackle beacon drag-stuff gitignore-mode erlang elixir-yasnippets flycheck-dialyxir alchemist flycheck-elixir flycheck-mix neotree flycheck projectile which-key smartparens magit company git-gutter popup-imenu ido-vertical-mode ido-ubiquitous command-log-mode smex highlight-symbol fill-column-indicator solarized-theme rainbow-delimiters exec-path-from-shell all-the-icons use-package))))
+    (highlight-parenthesis-mode highlight-parenthesis highlight-parentheses dired-k paredit autopair deferred spaceline-config spaceline restclient zone-nyan nyan-mode symon ace-window counsel-projectile counsel swiper powerline git-gutter-fringe arjen-grey-theme multiple-cursors imenu+ avy dracula-theme flycheck-cstyle yaml-mode go-eldoc go-mode shackle beacon drag-stuff gitignore-mode erlang flycheck-dialyxir alchemist flycheck-elixir flycheck-mix neotree flycheck projectile which-key smartparens magit company git-gutter popup-imenu ido-vertical-mode ido-ubiquitous command-log-mode smex highlight-symbol fill-column-indicator solarized-theme rainbow-delimiters exec-path-from-shell all-the-icons use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

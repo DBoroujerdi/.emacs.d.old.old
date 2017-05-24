@@ -8,10 +8,10 @@
 (use-package makefile-mode
   :mode "Makefile")
 
-(use-package symon
-  :ensure t
-  :config (progn
-            (symon-mode)))
+;; (use-package symon
+;;   :ensure t
+;;   :config (progn
+;;             (symon-mode)))
 
 (use-package windmove
   :bind (("S-<left>" . windmove-left)
@@ -37,6 +37,8 @@
 	  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 	  (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 	  (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
+          (add-hook 'emacs-lisp-mode-hook 'autopair-mode)
+          (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
 	  )
 
   :config (progn
@@ -46,6 +48,14 @@
 	    (define-key emacs-lisp-mode-map "\C-x\C-e" 'pp-eval-last-sexp)
 	    )
   )
+
+;; todo: get this working
+;; (use-package highlight-parenthesis-mode
+;;   :ensure t
+;;   :diminish highlight-parentheses-mode)
+
+(use-package paredit
+  :ensure t)
 
 (use-package multiple-cursors
   :ensure t
@@ -183,19 +193,19 @@
 	  (setenv "GIT_PAGER" "")
 	  (setq magit-completing-read-function 'magit-ido-completing-read)))
 
+;; (use-package smartparens
+;;   :ensure t
+;;   :diminish smartparens-mode
+;;   :config (progn
+;; 	    (require 'smartparens-config)
+;; 	    (smartparens-global-mode 1)))
 
-(use-package smartparens
+(use-package autopair
   :ensure t
-  :diminish smartparens-mode
-  :config (progn
-	    (require 'smartparens-config)
-	    (smartparens-global-mode 1)))
+  :diminish autopair-mode)
 
-(use-package magit
-  :ensure t
-  :config (progn
-	    (setenv "GIT_PAGER" "")
-	    (setq magit-completing-read-function 'magit-ido-completing-read)))
+(use-package restclient
+  :ensure t)
 
 (use-package which-key
   :ensure t
@@ -207,15 +217,19 @@
 
 (use-package yasnippet
   :ensure t
-  :defer 4
   :diminish yas-minor-mode
+  :init (progn
+          (yas-global-mode 1))
   :config (progn
-	    (global-unset-key (kbd "s-e"))
+	    ;; (global-unset-key (kbd "s-e"))
 	    (setq-default yas-snippet-dirs '("~/.emacs.d/snippets"))
-	    (define-key yas-minor-mode-map (kbd "<tab>") nil)
-	    (define-key yas-minor-mode-map (kbd "TAB") nil)
-	    (define-key yas-minor-mode-map (kbd "s-e") 'yas-expand)
-	    (yas-global-mode t)))
+	    ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
+	    ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
+	    ;; (define-key yas-minor-mode-map (kbd "s-e") 'yas-expand)
+
+            (yas-reload-all)
+            (add-hook 'prog-mode-hook #'yas-minor-mode)
+            ))
 
 (use-package projectile
   :ensure t
@@ -247,6 +261,7 @@
           (setq neo-show-hidden-files t)
           (setq neo-autorefresh nil)
           (setq neo-window-width 28)
+          (setq neo-hidden-regexp-list '("\\*.beam"))
 
 	  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
@@ -254,11 +269,8 @@
 	  (global-set-key [f8] 'neotree-toggle)
 	  ))
 
-;; (use-package flycheck-mix
+;; (use-package flycheck-elixir
 ;;   :ensure t)
-
-(use-package flycheck-elixir
-  :ensure t)
 
 (use-package elixir-mode
   :ensure t
@@ -267,28 +279,30 @@
 	  (add-hook 'elixir-mode-hook 'alchemist-mode)
 	  ;; (add-hook 'elixir-mode-hook 'elixir-add-electric-pairs)
 	  ;; (add-hook 'elixir-mode-hook 'flycheck-elixir)
+          (add-hook 'elixir-mode-hook #'yas-minor-mode)
 	  (add-hook 'elixir-mode-hook 'flycheck-mode)
 	  )
   :config (progn
 	    ;; smart parens - reuse some ruby functionality
-	    (sp-with-modes '(elixir-mode)
-	      (sp-local-pair "fn" "end"
-			     :when '(("SPC" "RET"))
-			     :actions '(insert navigate))
-	      (sp-local-pair "do" "end"
-			     :when '(("SPC" "RET"))
-			     :post-handlers '(sp-ruby-def-post-handler)
-			     :actions '(insert navigate)))
-	    ))
+	    ;; (sp-with-modes '(elixir-mode)
+	    ;;   (sp-local-pair "fn" "end"
+	    ;;     	     :when '(("SPC" "RET"))
+	    ;;     	     :actions '(insert navigate))
+	    ;;   (sp-local-pair "do" "end"
+	    ;;     	     :when '(("SPC" "RET"))
+	    ;;     	     :post-handlers '(sp-ruby-def-post-handler)
+	    ;;     	     :actions '(insert navigate)))
+	    )
 
-(use-package flycheck-mix
-  :ensure t
-  :config (progn
-	    (flycheck-mix-setup)
-	    ))
+  (use-package flycheck-mix
+    :ensure t
+    :config (progn
+              (flycheck-mix-setup)
+              )))
 
 (use-package alchemist
   :ensure t
+  ;; :bind (("M-." . alchemist-goto-definition-at-point))
   :config (progn
 	    (setq alchemist-goto-erlang-source-dir "~/projects/open-source/otp/")
 	    (setq alchemist-goto-elixir-source-dir "~/projects/open-source/elixir/")
@@ -296,6 +310,8 @@
 	    (setq alchemist-test-display-compilation-output t)
 	    (setq alchemist-hooks-test-on-save nil)
 	    (setq alchemist-hooks-compile-on-save nil)
+            (setq alchemist-mix-test-task "espec")
+            (setq alchemist-hooks-compile-on-save t)
 
 	    ;; allows the jumping back out of erlang code
 	    (defun custom-erlang-mode-hook ()
@@ -304,9 +320,6 @@
 	    ))
 
 (use-package flycheck-dialyxir
-  :ensure t)
-
-(use-package elixir-yasnippets
   :ensure t)
 
 (use-package erlang
@@ -421,6 +434,15 @@
   :ensure t
   :config
   (global-set-key (kbd "C-x o") 'ace-window))
+
+(use-package tramp
+  :config
+  (setq tramp-verbose 9
+        tramp-default-method "ssh"
+        tramp-ssh-controlmaster-options
+        (concat "-o ControlPath=/tmp/tramp.%%r@%%h:%%p "
+                "-o ControlMaster=auto "
+                "-o ControlPersist=no")))
 
 
 (provide 'init-packages)

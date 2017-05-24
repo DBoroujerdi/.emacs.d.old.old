@@ -5,3 +5,5 @@ ido.*
 elpa/
 auto-save-list
 .cask/
+tramp
+url/
