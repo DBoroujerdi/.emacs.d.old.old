@@ -221,12 +221,6 @@
   :init (progn
           (yas-global-mode 1))
   :config (progn
-	    ;; (global-unset-key (kbd "s-e"))
-	    ;; (setq-default yas-snippet-dirs '("~/.emacs.d/snippets"))
-	    ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
-	    ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
-	    ;; (define-key yas-minor-mode-map (kbd "s-e") 'yas-expand)
-
             (yas-reload-all)
             (add-hook 'prog-mode-hook #'yas-minor-mode)
             ))
@@ -258,10 +252,10 @@
   :ensure t
   :init (progn
 	  (setq neo-smart-open nil)
-          (setq neo-show-hidden-files t)
+          ;; (setq neo-show-hidden-files t)
           (setq neo-autorefresh nil)
           (setq neo-window-width 28)
-          (setq neo-hidden-regexp-list '("\\*.beam"))
+          (setq neo-hidden-regexp-list '("\\*.beam$"))
 
 	  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
