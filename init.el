@@ -101,7 +101,7 @@
 
 (setq c-default-style "linux" c-basic-offset 8)
 
-;; (set-frame-font "Inconsolata 18" t t)
+(set-frame-font "Fira Mono 14" t t)
 
 ;; for new frames and emacs client..
 ;; (setq default-frame-alist '((font . "DejaVu Sans Mono")))
@@ -146,8 +146,9 @@
 
 ;; (use-package solarized-theme :ensure t)
 ;; (use-package arjen-grey-theme :ensure t)
+(use-package doom-themes :ensure t)
 
-;; (load-theme 'arjen-grey t)
+(load-theme 'doom-vibrant t)
 
 
 ;;
