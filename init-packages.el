@@ -255,7 +255,7 @@
           ;; (setq neo-show-hidden-files t)
           (setq neo-autorefresh nil)
           (setq neo-window-width 28)
-          (setq neo-hidden-regexp-list '("\\*.beam$"))
+          (setq neo-hidden-regexp-list '("\\.beam$"))
 
 	  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
