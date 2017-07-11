@@ -23,7 +23,7 @@
 
 (global-set-key (kbd "M-/") 'hippie-expand)
 
-(global-set-key (kbd "C-u") 'undo)
+(global-set-key (kbd "C-/") 'undo)
 
 ;; remap C-a to `smarter-move-beginning-of-line'
 (global-set-key [remap move-beginning-of-line] 'db/smarter-move-beginning-of-line)
