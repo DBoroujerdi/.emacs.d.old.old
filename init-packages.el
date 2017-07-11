@@ -21,7 +21,7 @@
 
 (use-package nyan-mode
   :ensure t
-  :init (nyan-mode 1))
+  :init (nyan-mode 0))
 
 (use-package zone-nyan
   :ensure t)
