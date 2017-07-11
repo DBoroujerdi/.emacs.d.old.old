@@ -179,6 +179,7 @@
   (global-git-gutter-mode t))
 
 (use-package company
+  :diminish company-mode
   :ensure t
   :config (progn
 	    (add-hook 'after-init-hook 'global-company-mode)))
@@ -426,6 +427,7 @@
 
 (use-package ivy
   :ensure t
+  :diminish ivy-mode
   :bind (
          ("M-y" . ivy-next-line)
          )
@@ -437,6 +439,10 @@
             (setq ivy-re-builders-alist
                   '((t . ivy--regex-fuzzy)))
             ))
+
+(use-package undo-tree
+  :diminish undo-tree-mode
+  :ensure t)
 
 (use-package counsel-projectile
   :ensure t
