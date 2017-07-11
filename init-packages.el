@@ -138,7 +138,7 @@
 	  (setq ido-ignore-extensions t)
 	  )
   :config (progn
-	    (use-package ido-ubiquitous
+	    (use-package ido-completing-read+
 	      :ensure t)
 
 	    (use-package ido-vertical-mode
