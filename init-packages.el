@@ -398,26 +398,45 @@
 
 (use-package counsel
   :ensure t
-  :bind
-  (("M-x" . counsel-M-x)
-   ("M-y" . counsel-yank-pop)
-   :map ivy-minibuffer-map
-   ("M-y" . ivy-next-line)))
-
+  :bind(
+        ("M-x" . counsel-M-x)
+        ("M-y" . counsel-yank-pop)
+        ("C-x C-f" . counsel-find-file)
+        ("M-i" . counsel-imenu)
+        ("C-c g" . counsel-git)
+        ("C-c j" . counsel-git-grep)
+        ("C-c k" . counsel-ag)
+        ("C-c l" . counsel-locate)
+        ("C-c h f" . counsel-describe-function)
+        ("C-c h v" . counsel-describe-variable)
+        ("C-c h s" . counsel-info-lookup-symbol)
+        ("C-c i u" . counsel-unicode-char)
+        ("<f1> f" . counsel-describe-function)
+        ("<f1> v" . counsel-describe-variable)
+        ("<f1> l" . counsel-find-library)
+        ("<f2> i" . counsel-info-lookup-symbol)
+        ("<f2> u" . counsel-unicode-char)
+        ))
 
 (use-package swiper
   :ensure t
-  :bind (("C-s" . swiper)
-         ("C-x C-f" . counsel-find-file)
-         ("M-i" . counsel-imenu)
-         ("C-c g" . counsel-git)
-         ("C-c j" . counsel-git-grep)
-         ("C-c k" . counsel-ag)
-         ("C-c l" . counsel-locate)
-         ("C-c h f" . counsel-describe-function)
-         ("C-c h v" . counsel-describe-variable)
-         ("C-c i u" . counsel-unicode-char)
+  :bind (
+         ("C-s" . swiper)
          ))
+
+(use-package ivy
+  :ensure t
+  :bind (
+         ("M-y" . ivy-next-line)
+         )
+  :config (progn
+            (ivy-mode 1)
+
+            (setq ivy-use-virtual-buffers t)
+            (setq ivy-count-format "(%d/%d) ")
+            (setq ivy-re-builders-alist
+                  '((t . ivy--regex-fuzzy)))
+            ))
 
 (use-package counsel-projectile
   :ensure t
@@ -437,7 +456,6 @@
         (concat "-o ControlPath=/tmp/tramp.%%r@%%h:%%p "
                 "-o ControlMaster=auto "
                 "-o ControlPersist=no")))
-
 
 (provide 'init-packages)
 ;;; init-packages.el ends here
