@@ -331,15 +331,28 @@
 (use-package flycheck-dialyxir
   :ensure t)
 
+
+(use-package ivy-erlang-complete
+  :ensure t)
+
+(use-package company-erlang
+  :ensure t)
+
 (use-package erlang
   :ensure t
   :init (progn
 	  (add-hook 'erlang-mode-hook '(lambda() (setq indent-tabs-mode nil)))
 	  (add-hook 'erlang-mode-hook '(lambda () (highlight-symbol-mode 1)))
+          (add-hook 'erlang-mode-hook #'company-erlang-init)
+          (add-hook 'erlang-mode-hook #'ivy-erlang-complete-init)
+          ;; automatic update completion data after save
+          (add-hook 'after-save-hook #'ivy-erlang-complete-reparse)
 	  )
   :config (progn
 	    (require 'erlang-start)
 	    (require 'fill-column-indicator)
+
+            (setq ivy-erlang-complete-erlang-root "~/projects/open-source/otp/")
 
 	    (global-flycheck-mode -1)
 
