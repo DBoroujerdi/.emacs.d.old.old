@@ -94,18 +94,18 @@
 	    (exec-path-from-shell-initialize))
 	  ))
 
-(use-package shackle
-  :ensure t
-  :init
-  (setq shackle-rules
-	'(
-	  ("*alchemist test report*" :select nil :size 0.3 :align 'below)
-	  ("*Flycheck errors*" :ratio 0.25 :align t :size 0.2)
-	  ))
-  :config (progn
-	    (shackle-mode t)
-	    )
-  )
+;; (use-package shackle
+;;   :ensure t
+;;   :init
+;;   (setq shackle-rules
+;; 	'(
+;; 	  ("*alchemist test report*" :select nil :size 0.3 :align 'below)
+;; 	  ;; ("*Flycheck errors*" :ratio 0.25 :align t :size 0.2)
+;; 	  ))
+;;   :config (progn
+;; 	    (shackle-mode t)
+;; 	    )
+;;   )
 
 (use-package rainbow-delimiters
   :ensure t)
@@ -181,7 +181,21 @@
 (use-package company
   :diminish company-mode
   :ensure t
+  :init (setq
+         company-dabbrev-ignore-case nil
+         company-dabbrev-code-ignore-case nil
+         company-dabbrev-downcase nil
+         company-idle-delay 0
+         company-minimum-prefix-length 4)
   :config (progn
+            (define-key company-active-map (kbd "C-n") 'company-select-next)
+            (define-key company-active-map (kbd "C-p") 'company-select-previous)
+            (define-key company-active-map (kbd "C-f") 'company-complete-selection)
+
+            ;; disables TAB in company-mode, freeing it for yasnippet
+            (define-key company-active-map (kbd "TAB") nil)
+            (define-key company-active-map [tab] nil)
+
 	    (add-hook 'after-init-hook 'global-company-mode)))
 
 (use-package magit
@@ -337,14 +351,42 @@
 	    (add-to-list 'auto-mode-alist '("\\.terms\\'" . erlang-mode))
 	    ))
 
+
+(use-package scala-mode
+  :ensure t
+  :interpreter
+  ("scala" . scala-mode)
+  :init (setq comment-start "/* "
+              comment-end " */"
+              comment-style 'multi-line
+              comment-empty-lines t)
+  :config (progn
+            (defun scala-mode-newline-comments ()
+              "Custom newline appropriate for `scala-mode'."
+              ;; shouldn't this be in a post-insert hook?
+              (interactive)
+              (newline-and-indent)
+              (scala-indent:insert-asterisk-on-multiline-comment))
+
+            (bind-key "RET" 'scala-mode-newline-comments scala-mode-map)))
+
+(use-package eldoc
+  :ensure nil
+  :diminish eldoc-mode
+  :commands eldoc-mode)
+
 (use-package ensime
-  :disabled
-  :mode "\\.scala\\'"
   :ensure t
   :pin melpa-stable
   :config (progn
-	    (scala-mode:goto-start-of-code)
+	    ;; (scala-mode:goto-start-of-code)
 	    (global-set-key (kbd "C-<backspace>") 'contextual-backspace)
+
+            (setq
+             ensime-sbt-command "/usr/local/bin/sbt"
+             sbt:program-name "/usr/local/bin/sbt")
+
+            (setq ensime-search-interface 'ivy)
 
 	    (defun contextual-backspace ()
 	      "Hungry whitespace or delete word depending on context."
