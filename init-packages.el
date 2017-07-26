@@ -518,5 +518,14 @@
                 "-o ControlMaster=auto "
                 "-o ControlPersist=no")))
 
+(use-package haskell-mode
+  :ensure t)
+
+(use-package intero
+  :ensure t
+  :init (progn
+          (add-hook 'haskell-mode-hook 'intero-mode)
+          ))
+
 (provide 'init-packages)
 ;;; init-packages.el ends here
