@@ -11,7 +11,7 @@
 (global-set-key [C-tab] 'other-window)
 (global-set-key [C-S-iso-lefttab] 'previous-multiframe-window)
 
-(global-set-key (kbd "M-d") 'db/duplicate-line)
+(global-set-key (kbd "C-<down>") 'db/duplicate-line)
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-/") 'comment-line)
 

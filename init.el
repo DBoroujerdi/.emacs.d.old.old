@@ -56,8 +56,8 @@
 ;; Cmd as meta
 (setq mac-option-key-is-meta nil)
 (setq mac-command-key-is-meta t)
+(setq mac-option-modifier 'super) ; make opt key do Super
 (setq mac-command-modifier 'meta)
-(setq mac-option-modifier nil)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -101,13 +101,13 @@
 
 (setq c-default-style "linux" c-basic-offset 8)
 
-(set-frame-font "Fira Mono 14" t t)
-
 ;; for new frames and emacs client..
 ;; (setq default-frame-alist '((font . "DejaVu Sans Mono")))
 
 ;; set font size
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 110)
+
+(set-frame-font "Fira Mono" t t)
 
 ;; delete trailing whitespace on save action
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -148,7 +148,7 @@
 ;; (use-package arjen-grey-theme :ensure t)
 (use-package doom-themes :ensure t)
 
-(load-theme 'doom-vibrant t)
+;; (load-theme 'doom-vibrant t)
 
 
 ;;
@@ -162,10 +162,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
+    ("e1994cf306356e4358af96735930e73eadbaf95349db14db6d9539923b225565" "0f0022c8091326c9894b707df2ae58dd51527b0cf7abcb0a310fb1e7bda78cd2" "8d737627879eff1bbc7e3ef1e9adc657207d9bf74f9abb6e0e53a6541c5f2e88" "5310b88333fc64c0cb34a27f42fa55ce371438a55f02ac7a4b93519d148bd03d" "0eef522d30756a80b28333f05c7eed5721f2ba9b3eaaff244ea4c6f6a1b8ac62" "f67652440b66223b66a4d3e9c0ddeddbf4a6560182fa38693bdc4d940ce43a2e" "ff7625ad8aa2615eae96d6b4469fcc7d3d20b2e1ebc63b761a349bebbb9d23cb" default)))
  '(package-selected-packages
    (quote
-    (highlight-parenthesis-mode highlight-parenthesis highlight-parentheses dired-k paredit autopair deferred spaceline-config spaceline restclient zone-nyan nyan-mode symon ace-window counsel-projectile counsel swiper powerline git-gutter-fringe arjen-grey-theme multiple-cursors imenu+ avy dracula-theme flycheck-cstyle yaml-mode go-eldoc go-mode shackle beacon drag-stuff gitignore-mode erlang flycheck-dialyxir alchemist flycheck-elixir flycheck-mix neotree flycheck projectile which-key smartparens magit company git-gutter popup-imenu ido-vertical-mode ido-ubiquitous command-log-mode smex highlight-symbol fill-column-indicator solarized-theme rainbow-delimiters exec-path-from-shell all-the-icons use-package))))
+    (intero haskell-mode flycheck-cask yatemplate company-erlang ivy-erlang-complete eclipse-theme doom-themes ensime evil firestarter magithub highlight-parenthesis-mode highlight-parenthesis highlight-parentheses dired-k paredit autopair deferred spaceline-config spaceline restclient zone-nyan nyan-mode symon ace-window counsel-projectile counsel swiper powerline git-gutter-fringe arjen-grey-theme multiple-cursors imenu+ avy dracula-theme flycheck-cstyle yaml-mode go-eldoc go-mode beacon drag-stuff gitignore-mode erlang flycheck-dialyxir alchemist flycheck-elixir flycheck-mix neotree flycheck projectile which-key smartparens magit company git-gutter popup-imenu ido-vertical-mode ido-ubiquitous command-log-mode smex highlight-symbol fill-column-indicator solarized-theme rainbow-delimiters exec-path-from-shell all-the-icons use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

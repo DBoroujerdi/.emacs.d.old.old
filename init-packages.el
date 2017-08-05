@@ -240,6 +240,14 @@
             (add-hook 'prog-mode-hook #'yas-minor-mode)
             ))
 
+(use-package yatemplate
+  :ensure t
+  :defer 2 ;; WORKAROUND https://github.com/mineo/yatemplate/issues/3
+  :config
+  (auto-insert-mode)
+  (setq auto-insert-alist nil)
+  (yatemplate-fill-alist))
+
 (use-package projectile
   :ensure t
   :diminish projectile-mode
@@ -388,6 +396,27 @@
   :diminish eldoc-mode
   :commands eldoc-mode)
 
+
+(use-package erc
+  :ensure t
+  :commands erc erc-tls
+  :init
+  (setq
+   erc-prompt-for-password nil ;; prefer ~/.authinfo for passwords
+   erc-hide-list '("JOIN" "PART" "QUIT")
+   erc-autojoin-channels-alist
+   '(("irc.freenode.net" "#emacs")
+     ("irc.gitter.im" "#ensime/ensime-server" "#ensime/ensime-emacs"))))
+
+(defun gitter()
+  "Connect to Gitter."
+  (interactive)
+  (erc-tls :server "irc.gitter.im" :port 6697))
+(defun freenode()
+  "Connect to Freenode."
+  (interactive)
+  (erc :server "irc.freenode.net" :port 6667))
+
 (use-package ensime
   :ensure t
   :pin melpa-stable
@@ -417,6 +446,11 @@
 		 (t
 		  (backward-kill-word 1)))))
 	    ))
+
+(use-package flycheck-cask
+  :ensure t
+  :commands flycheck-cask-setup
+  :config (add-hook 'emacs-lisp-mode-hook (flycheck-cask-setup)))
 
 (use-package go-mode
   :ensure t
@@ -492,12 +526,13 @@
             (setq ivy-use-virtual-buffers t)
             (setq ivy-count-format "(%d/%d) ")
             (setq ivy-re-builders-alist
-                  '((t . ivy--regex-fuzzy)))
+                  '((t . ivy--regex-plus)))
             ))
 
 (use-package undo-tree
   :diminish undo-tree-mode
-  :ensure t)
+  :config (global-undo-tree-mode)
+  :bind ("s-/" . undo-tree-visualize))
 
 (use-package counsel-projectile
   :ensure t

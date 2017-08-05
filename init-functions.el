@@ -23,13 +23,12 @@ point reaches the beginning or end of the buffer, stop there."
       (move-beginning-of-line 1))))
 
 (defun db/duplicate-line ()
-  "Duplicate the current line and insert the duplicate below the current line"
+  "Duplicate the current line and insert the duplicate below the current line."
   (interactive)
   (save-excursion
     (let ((line-contents (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
       (move-end-of-line 1)
       (newline)
       (insert line-contents))))
-
 
 (provide 'init-functions)
