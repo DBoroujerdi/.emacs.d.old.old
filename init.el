@@ -148,7 +148,7 @@
 ;; (use-package arjen-grey-theme :ensure t)
 (use-package doom-themes :ensure t)
 
-;; (load-theme 'doom-vibrant t)
+(load-theme 'doom-vibrant t)
 
 
 ;;
