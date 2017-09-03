@@ -198,6 +198,9 @@
 
 	    (add-hook 'after-init-hook 'global-company-mode)))
 
+(use-package git-timemachine
+  :ensure t)
+
 (use-package magit
   :ensure t
   :bind (("C-c s" . magit-status)
