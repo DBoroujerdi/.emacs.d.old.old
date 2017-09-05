@@ -424,6 +424,8 @@
   :ensure t
   :pin melpa-stable
   :config (progn
+            (add-hook 'ensime-mode-hook 'show-paren-mode)
+
 	    ;; (scala-mode:goto-start-of-code)
 	    (global-set-key (kbd "C-<backspace>") 'contextual-backspace)
 
