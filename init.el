@@ -90,11 +90,36 @@
 ;; (global-linum-mode t)
 
 ;; window size
-(setq initial-frame-alist '((top . 0) (left . 0) (width . 300) (height . 80)))
+;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 300) (height . 80)))
 ;; new window sizes
-(setq default-frame-alist '((top . 0) (left . 0) (width . 300) (height . 80)))
+;; (setq default-frame-alist '((top . 0) (left . 0) (width . 300) (height . 80)))
 ;; width  -> num characters
 ;; height -> num lines
+
+
+(if (display-graphic-p)
+    (progn
+      (setq initial-frame-alist
+            '(
+              (tool-bar-lines . 0)
+              (width . 200) ; chars
+              (height . 60) ; lines
+              ))
+
+      (setq default-frame-alist
+            '(
+              (tool-bar-lines . 0)
+              (width . 200)
+              (height . 60)
+              )))
+  (progn
+    (setq initial-frame-alist
+          '(
+            (tool-bar-lines . 0)))
+    (setq default-frame-alist
+          '(
+            (tool-bar-lines . 0)))))
+
 
 ;; limit the number of times a frame can split
 (setq split-width-threshold 200)
