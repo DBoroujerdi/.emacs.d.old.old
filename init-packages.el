@@ -567,5 +567,50 @@
           (add-hook 'haskell-mode-hook 'intero-mode)
           ))
 
+(use-package bm
+  :ensure t
+  :config (progn
+
+            (defun bm-counsel-get-list (bookmark-overlays)
+              (-map (lambda (bm)
+                      (with-current-buffer (overlay-buffer bm)
+                        (let* ((line (replace-regexp-in-string "\n$" "" (buffer-substring (overlay-start bm)
+                                                                                          (overlay-end bm))))
+                               ;; line numbers start on 1
+                               (line-num (+ 1 (count-lines (point-min) (overlay-start bm))))
+                               (name (format "%s:%d - %s" (buffer-name) line-num line))
+                               )
+
+                          `(,name . ,bm)
+                          )
+                        )
+                      )
+                    bookmark-overlays))
+
+            (defun bm-counsel-find-bookmark ()
+              (interactive)
+
+              (let* ((bm-list (bm-counsel-get-list (bm-overlays-lifo-order t)))
+                     (bm-hash-table (make-hash-table :test 'equal))
+                     (search-list (-map (lambda (bm) (car bm)) bm-list)))
+
+                (-each bm-list (lambda (bm)
+                                 (puthash (car bm) (cdr bm) bm-hash-table)
+                                 ))
+
+                (ivy-read "Find bookmark: "
+                          search-list
+                          :require-match t
+                          :keymap counsel-describe-map
+                          :action (lambda (chosen)
+                                    (let ((bookmark (gethash chosen bm-hash-table)))
+                                      (switch-to-buffer (overlay-buffer bookmark))
+                                      (bm-goto bookmark)
+                                      ))
+                          :sort t
+                          )))
+
+            ))
+
 (provide 'init-packages)
 ;;; init-packages.el ends here
