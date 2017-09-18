@@ -1,6 +1,9 @@
 *~
 smex-items
 projectile-bookmarks.eld
+projectile.cache
+bookmarks
+server/
 ido.*
 elpa/
 auto-save-list
