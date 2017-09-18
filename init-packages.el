@@ -38,7 +38,6 @@
 	  (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
 	  (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
           (add-hook 'emacs-lisp-mode-hook 'autopair-mode)
-          (add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
 	  )
 
   :config (progn
@@ -48,11 +47,6 @@
 	    (define-key emacs-lisp-mode-map "\C-x\C-e" 'pp-eval-last-sexp)
 	    )
   )
-
-;; todo: get this working
-;; (use-package highlight-parenthesis-mode
-;;   :ensure t
-;;   :diminish highlight-parentheses-mode)
 
 (use-package paredit
   :ensure t)
