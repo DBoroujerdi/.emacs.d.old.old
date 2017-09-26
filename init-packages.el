@@ -374,10 +374,16 @@
   :ensure t
   :interpreter
   ("scala" . scala-mode)
-  :init (setq comment-start "/* "
-              comment-end " */"
-              comment-style 'multi-line
-              comment-empty-lines t)
+  :init (progn
+          (defun scala-comment-blocks ()
+            (set (make-local-variable 'comment-start) "/* ")
+            (set (make-local-variable 'comment-end) " */")
+            (set (make-local-variable 'comment-style) 'multi-line)
+            (set (make-local-variable 'comment-empty-lines) t))
+
+          (add-hook 'scala-mode-hook (lambda () (scala-comment-blocks)))
+          (add-hook 'scala-mode-hook 'subword-mode)
+          )
   :config (progn
             (defun scala-mode-newline-comments ()
               "Custom newline appropriate for `scala-mode'."
