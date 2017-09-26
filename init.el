@@ -53,11 +53,14 @@
 ;; typed text replaces selected
 (delete-selection-mode 1)
 
-;; Cmd as meta
-(setq mac-option-key-is-meta nil)
-(setq mac-command-key-is-meta t)
-(setq mac-option-modifier 'super) ; make opt key do Super
-(setq mac-command-modifier 'meta)
+(if (eq system-type 'darwin)
+    (progn
+      ;; Cmd as meta
+      (setq mac-option-key-is-meta nil)
+      (setq mac-command-key-is-meta t)
+      (setq mac-option-modifier 'super) ; make opt key do Super
+      (setq mac-command-modifier 'meta)
+      ))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
