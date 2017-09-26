@@ -28,4 +28,10 @@
 ;; remap C-a to `smarter-move-beginning-of-line'
 (global-set-key [remap move-beginning-of-line] 'db/smarter-move-beginning-of-line)
 
+;; resizing buffer windows using alt-command-direction
+(global-set-key (kbd "<M-s-up>") 'enlarge-window)
+(global-set-key (kbd "<M-s-left>") 'shrink-window-horizontally)
+(global-set-key (kbd "<M-s-down>") 'shrink-window)
+(global-set-key (kbd "<M-s-right>") 'enlarge-window-horizontally)
+
 (provide 'init-keys)
