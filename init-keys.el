@@ -34,4 +34,8 @@
 (global-set-key (kbd "<M-s-down>") 'shrink-window)
 (global-set-key (kbd "<M-s-right>") 'enlarge-window-horizontally)
 
+;;navigate forwards and backwards through visited buffers
+(global-set-key (kbd "M-]") 'next-buffer)
+(global-set-key (kbd "M-[") 'previous-buffer)
+
 (provide 'init-keys)
