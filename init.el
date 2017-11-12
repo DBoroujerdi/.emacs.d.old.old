@@ -132,16 +132,20 @@
 ;; for new frames and emacs client..
 ;; (setq default-frame-alist '((font . "DejaVu Sans Mono")))
 
+(defun set-default-font-if-exists (font)
+  (if (x-list-fonts font)
+      (set-default-font font)
+    ))
+
 ;; set font size
 (set-face-attribute 'default nil :height 110)
-
-(set-frame-font "Fira Code" t t)
 
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 
 (when (window-system)
-  (set-default-font "Fira Code"))
+  (set-default-font-if-exists "Fira Code"))
+
 (let ((alist '((33 . ".\\(?:\\(?:==\\|!!\\)\\|[!=]\\)")
                (35 . ".\\(?:###\\|##\\|_(\\|[#(?[_{]\\)")
                (36 . ".\\(?:>\\)")

@@ -192,6 +192,12 @@
 
 	    (add-hook 'after-init-hook 'global-company-mode)))
 
+(use-package company-quickhelp
+  :ensure t
+  :config (progn
+            (company-quickhelp-mode 1)
+))
+
 (use-package git-timemachine
   :ensure t)
 
@@ -483,6 +489,38 @@
       :init
       (add-hook 'go-mode-hook 'go-eldoc-setup))
     ))
+
+
+(use-package tide
+  :ensure t
+  :config (progn
+            (flycheck-mode +1)
+            (setq flycheck-check-syntax-automatically '(save mode-enabled))
+            (eldoc-mode +1)
+            (tide-hl-identifier-mode +1)
+            ;; company is an optional dependency. You have to
+            ;; install it separately via package-install
+            ;; `M-x package-install [ret] company`
+            (company-mode +1)
+
+            ;; aligns annotation to the right hand side
+            (setq company-tooltip-align-annotations t)
+
+            ;; formats the buffer before saving
+            (add-hook 'before-save-hook 'tide-format-before-save)
+
+            (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+            (flycheck-add-next-checker 'javascript-eslint 'javascript-tide 'append)
+
+            ))
+
+(use-package js2-mode
+  :mode ".js"
+  :ensure t
+  :config (progn
+            (add-hook 'js2-mode-hook #'tide-setup)
+            ))
 
 (use-package clojure-mode
   :mode "\\.clj\\'"
