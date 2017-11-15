@@ -48,6 +48,9 @@
 	    )
   )
 
+(use-package ess
+  :ensure t)
+
 (use-package paredit
   :ensure t)
 
