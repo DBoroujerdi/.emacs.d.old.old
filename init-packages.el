@@ -608,6 +608,9 @@
           (add-hook 'haskell-mode-hook 'intero-mode)
           ))
 
+(use-package groovy-mode
+  :ensure t)
+
 (use-package bm
   :ensure t
   :config (progn
