@@ -246,6 +246,13 @@
             (add-hook 'prog-mode-hook #'yas-minor-mode)
             ))
 
+(use-package yaml-mode
+  :ensure t
+  :init (progn
+          (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+          (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+          ))
+
 (use-package yatemplate
   :ensure t
   :defer 2 ;; WORKAROUND https://github.com/mineo/yatemplate/issues/3
