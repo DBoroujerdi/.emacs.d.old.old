@@ -606,6 +606,30 @@
                 "-o ControlMaster=auto "
                 "-o ControlPersist=no")))
 
+(use-package ruby-mode
+  :init (progn
+          (add-hook 'ruby-mode-hook 'robe-mode)
+          ))
+
+(use-package enh-ruby-mode
+  :ensure t)
+
+(use-package robe
+  :ensure t
+  :config (progn
+            (eval-after-load 'company
+              '(push 'company-robe company-backends))
+
+            (defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
+              (rvm-activate-corresponding-ruby))
+            ))
+
+(use-package rvm
+  :ensure t
+  :config (progn
+            (rvm-use-default)
+            ))
+
 (use-package haskell-mode
   :ensure t)
 
