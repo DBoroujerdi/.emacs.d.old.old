@@ -608,6 +608,13 @@
   :config (global-undo-tree-mode)
   :bind ("s-/" . undo-tree-visualize))
 
+(use-package hydra
+  :ensure t
+  :config (progn
+            (load "~/.emacs.d/init-hydras")
+            (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
+            ))
+
 (use-package counsel-projectile
   :ensure t
   :config
