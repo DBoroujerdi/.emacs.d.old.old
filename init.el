@@ -22,10 +22,17 @@
   (package-refresh-contents))
 
 
+
 ;; ...but before everything, make sure `use-package' is installed.
-(unless (package-installed-p 'use-package)
-  (message "`use-package' not found.  Installing...")
-  (package-install 'use-package))
+;; (unless (package-installed-p 'use-package)
+;;   (message "`use-package' not found.  Installing...")
+;;   (package-install 'use-package))
+
+;; bootstrap from git submodule
+(eval-when-compile
+  ;; Following line is not needed if use-package.el is in ~/.emacs.d
+  (add-to-list 'load-path (concat user-emacs-directory (convert-standard-filename "vendor/use-package"))))
+
 
 (require 'use-package)
 (setq use-package-minimum-reported-time 0
