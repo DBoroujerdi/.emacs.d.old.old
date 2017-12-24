@@ -267,7 +267,7 @@
   :config (progn
 	    (projectile-global-mode 1)
 	    (setq projectile-switch-project-action 'projectile-dired)
-	    (setq projectile-switch-project-action 'neotree-projectile-action)
+	    (setq projectile-switch-project-action 'treemacs-projectile)
 	    ))
 
 (use-package flycheck
@@ -284,20 +284,41 @@
 	  ;; 		 (window-height   . 0.15)))
 	  ))
 
-(use-package neotree
+(use-package treemacs
   :ensure t
-  :init (progn
-	  (setq neo-smart-open nil)
-          ;; (setq neo-show-hidden-files t)
-          (setq neo-autorefresh nil)
-          (setq neo-window-width 28)
-          (setq neo-hidden-regexp-list '("\\.beam$"))
+  :defer t
+  :config
+  (progn
+    (setq treemacs-follow-after-init          t
+          treemacs-width                      35
+          treemacs-indentation                2
+          treemacs-collapse-dirs              (if (executable-find "python") 3 0)
+          treemacs-silent-refresh             nil
+          treemacs-change-root-without-asking nil
+          treemacs-sorting                    'alphabetic-desc
+          treemacs-show-hidden-files          t
+          treemacs-never-persist              nil
+          treemacs-is-never-other-window      nil
+          treemacs-goto-tag-strategy          'refetch-index)
 
-	  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (pcase (cons (not (null (executable-find "git")))
+                 (not (null (executable-find "python"))))
+      (`(t . t)
+       (treemacs-git-mode 'extended))
+      (`(t . _)
+       (treemacs-git-mode 'simple))))
+  :bind (:map global-map
+              ([f8]         . treemacs-toggle)
+              ("M-0"        . treemacs-select-window)
+              ))
 
-	  (global-set-key (kbd "C-c t") 'neotree-toggle)
-	  (global-set-key [f8] 'neotree-toggle)
-	  ))
+(use-package treemacs-projectile
+  :defer t
+  :ensure t
+  :config
+  (setq treemacs-header-function #'treemacs-projectile-create-header))
 
 ;; (use-package flycheck-elixir
 ;;   :ensure t)
