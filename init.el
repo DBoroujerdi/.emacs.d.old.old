@@ -1,6 +1,6 @@
 
 ;;
-;; Bootstrap
+;; Bootstrap package management
 ;;
 
 (require 'package)
@@ -22,34 +22,45 @@
   (package-refresh-contents))
 
 
+;; straight - for checking out packages with git, for local hacking and contributing
+(let ((bootstrap-file (concat user-emacs-directory "straight/bootstrap.el"))
+      (bootstrap-version 2))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-;; ...but before everything, make sure `use-package' is installed.
-;; (unless (package-installed-p 'use-package)
-;;   (message "`use-package' not found.  Installing...")
-;;   (package-install 'use-package))
 
-;; bootstrap from git submodule
-(eval-when-compile
-  ;; Following line is not needed if use-package.el is in ~/.emacs.d
-  (add-to-list 'load-path (concat user-emacs-directory (convert-standard-filename "vendor/use-package"))))
+;; Install `use-package`
+;; This can be done 1 of 3 ways
 
+;; 1. Simple way - from `package-install`
+(unless (package-installed-p 'use-package)
+  (message "`use-package' not found.  Installing...")
+  (package-install 'use-package))
 
+;; 2. Git-submodule - when you want to install a specific commit hash, maybe
+;; due to a bug
+;; (eval-when-compile
+;;   ;; Following line is not needed if use-package.el is in ~/.emacs.d
+;;   (add-to-list 'load-path (concat user-emacs-directory (convert-standard-filename "vendor/use-package"))))
+
+;; 3. With straight - you can then use straight flags in `use-package` commands
+;; (straight-use-package 'use-package)
+
+;; finally, load use-package
 (require 'use-package)
 (setq use-package-minimum-reported-time 0
       use-package-verbose t)
 
+;;
+;; End of package management bootstrap
+;;
 
-;; straight - for checking out packages with git, for local hacking and contributing
-;; (let ((bootstrap-file (concat user-emacs-directory "straight/bootstrap.el"))
-;;       (bootstrap-version 2))
-;;   (unless (file-exists-p bootstrap-file)
-;;     (with-current-buffer
-;;         (url-retrieve-synchronously
-;;          "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-;;          'silent 'inhibit-cookies)
-;;       (goto-char (point-max))
-;;       (eval-print-last-sexp)))
-;;   (load bootstrap-file nil 'nomessage))
 
 (message "Running as user %s .."
 	 ((lambda ()
@@ -60,6 +71,24 @@
 ;;
 ;; Config
 ;;
+
+;; elisp config
+;; Recompile if .elc exists.
+;;(add-hook (make-local-variable 'after-save-hook)
+;;    (lambda ()
+;;     (byte-force-recompile default-directory)))
+(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'flyspell-prog-mode) ;; Requires Ispell
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+(add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
+(add-hook 'emacs-lisp-mode-hook 'autopair-mode)
+(add-hook 'emacs-lisp-mode-hook '(lambda()
+                                  (setq indent-tabs-mode nil)
+                                  ;; (define-key flyspell-mode-map "\M-\t" nil)
+                                  (define-key emacs-lisp-mode-map "\r" 'reindent-then-newline-and-indent)
+                                  (define-key emacs-lisp-mode-map "\C-x\C-e" 'pp-eval-last-sexp)
+                                  ))
 
 ;; automatically load buffer when file changes outside of emacs
 (global-auto-revert-mode t)

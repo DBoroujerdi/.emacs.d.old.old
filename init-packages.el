@@ -26,28 +26,6 @@
 (use-package zone-nyan
   :ensure t)
 
-(use-package emacs-lisp-mode
-  :init (progn
-	  ;; Recompile if .elc exists.
-	  ;;(add-hook (make-local-variable 'after-save-hook)
-		;;    (lambda ()
-		;;     (byte-force-recompile default-directory)))
-	  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-	  ;; (add-hook 'emacs-lisp-mode-hook 'flyspell-prog-mode) ;; Requires Ispell
-	  (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-	  (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
-	  (add-hook 'emacs-lisp-mode-hook 'flycheck-mode)
-          (add-hook 'emacs-lisp-mode-hook 'autopair-mode)
-	  )
-
-  :config (progn
-	    (setq indent-tabs-mode nil)
-	    (define-key flyspell-mode-map "\M-\t" nil)
-	    (define-key emacs-lisp-mode-map "\r" 'reindent-then-newline-and-indent)
-	    (define-key emacs-lisp-mode-map "\C-x\C-e" 'pp-eval-last-sexp)
-	    )
-  )
-
 (use-package ess
   :ensure t)
 
