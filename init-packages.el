@@ -618,7 +618,7 @@
 (use-package counsel-projectile
   :ensure t
   :config
-  (counsel-projectile-on))
+  (counsel-projectile-mode))
 
 (use-package ace-window
   :ensure t
@@ -654,6 +654,7 @@
 
 (use-package rvm
   :ensure t
+  :defer
   :config (progn
             (rvm-use-default)
             ))
