@@ -54,6 +54,9 @@
 ;; Config
 ;;
 
+;; automatically load buffer when file changes outside of emacs
+(global-auto-revert-mode t)
+
 ;; This makes my Emacs startup time ~35% faster.
 (setq gc-cons-threshold 100000000)
 
