@@ -524,12 +524,52 @@
 
             ))
 
+
+(use-package xref-js2
+  :ensure t
+  :hook js2-mode)
+
 (use-package js2-mode
   :mode ".js"
   :ensure t
   :config (progn
             (add-hook 'js2-mode-hook #'tide-setup)
+
+            (add-hook 'js2-mode-hook #'js2-refactor-mosde)
+            (js2r-add-keybindings-with-prefix "C-c C-r")
+            (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+
+            ;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+            ;; unbind it.
+            (define-key js-mode-map (kbd "M-.") nil)
+
+            ;; todo check this works
+            ;; (add-hook 'js2-mode-hook (lambda ()
+            ;;                            (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
             ))
+
+
+(use-package tern
+  :ensure t
+  :hook js2-mode)
+
+(use-package company-tern
+  :ensure t
+  :hook js2-mode
+  :init (add-to-list 'company-backends 'company-tern)
+  :config (progn
+            ;; Disable completion keybindings, as we use xref-js2 instead
+            (define-key tern-mode-keymap (kbd "M-.") nil)
+            (define-key tern-mode-keymap (kbd "M-,") nil)
+            ))
+
+
+(use-package indium
+  :ensure t)
+
+(use-package js2-refactor
+  :ensure t
+  :hook js2-mode)
 
 (use-package clojure-mode
   :mode "\\.clj\\'"
